@@ -28,3 +28,9 @@ export type ResetPassword = {
   token: string;
   password: string;
 };
+
+export type CheckoutDefaults = {
+  deliveryMethod: string;
+  shippingMethodCode: string;
+  paymentMethodCode: string;
+};
