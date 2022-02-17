@@ -18,10 +18,12 @@ export type Scalars = {
   /** The `DateTime` scalar type represents a date and time. `DateTime` expects timestamps to be formatted in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. */
   DateTime: any;
   Decimal: any;
+  DynamicPropertyValue: any;
   Long: any;
   OptionalDecimal: any;
   OptionalNullableDecimal: any;
   OptionalString: any;
+  PropertyValue: any;
 };
 
 export type Asset = {
@@ -694,7 +696,7 @@ export type DynamicPropertyValueType = {
   /** Property name */
   name?: Maybe<Scalars['String']>;
   /** Property value */
-  value?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['DynamicPropertyValue']>;
   /** Value type */
   valueType?: Maybe<Scalars['String']>;
 };
@@ -1202,7 +1204,7 @@ export type InputDynamicPropertyValueType = {
   /** Dynamic property name */
   name: Scalars['String'];
   /** Dynamic property value. ID must be passed for dictionary item */
-  value?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['DynamicPropertyValue']>;
 };
 
 export type InputInviteUserType = {
@@ -2753,6 +2755,20 @@ export type PaymentTypeDynamicPropertiesArgs = {
   cultureName?: InputMaybe<Scalars['String']>;
 };
 
+export type PointsOperationType = {
+  amount: Scalars['Int'];
+  balance: Scalars['Int'];
+  createdBy?: Maybe<Scalars['String']>;
+  createdDate: Scalars['DateTime'];
+  id: Scalars['String'];
+  isDeposit: Scalars['Boolean'];
+  modifiedBy?: Maybe<Scalars['String']>;
+  modifiedDate?: Maybe<Scalars['DateTime']>;
+  reason: Scalars['String'];
+  storeId?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
+};
+
 export type PriceType = {
   /** Actual price */
   actual?: Maybe<MoneyType>;
@@ -2975,7 +2991,7 @@ export type Property = {
   name: Scalars['String'];
   propertyDictItems?: Maybe<PropertyDictionaryItemConnection>;
   type?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['PropertyValue']>;
   valueId?: Maybe<Scalars['String']>;
   /** ValueType of the property. */
   valueType?: Maybe<Scalars['String']>;
@@ -3047,6 +3063,7 @@ export enum PropertyType {
 }
 
 export type Query = {
+  balance?: Maybe<UserBalanceType>;
   cart?: Maybe<CartType>;
   carts?: Maybe<CartConnection>;
   categories?: Maybe<CategoryConnection>;
@@ -3076,6 +3093,12 @@ export type Query = {
   validatePassword?: Maybe<CustomIdentityResultType>;
   wishlist?: Maybe<WishlistType>;
   wishlists?: Maybe<WishlistConnection>;
+};
+
+
+export type QueryBalanceArgs = {
+  storeId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3458,6 +3481,18 @@ export type TierPriceType = {
   quantity?: Maybe<Scalars['Long']>;
 };
 
+export type UserBalanceType = {
+  amount: Scalars['Int'];
+  createdBy?: Maybe<Scalars['String']>;
+  createdDate: Scalars['DateTime'];
+  id: Scalars['String'];
+  modifiedBy?: Maybe<Scalars['String']>;
+  modifiedDate?: Maybe<Scalars['DateTime']>;
+  pointsOperations: Array<Maybe<PointsOperationType>>;
+  storeId?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
+};
+
 export type UserType = {
   accessFailedCount: Scalars['Int'];
   /** The associated contact info */
@@ -3786,7 +3821,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { product?: { name: string, id: string, code: string, slug?: string, outline?: string, minQuantity?: number, maxQuantity?: number, imgSrc?: string, images?: Array<{ url?: string }>, breadcrumbs?: Array<{ itemId: string, typeName?: string, title: string, seoPath?: string }>, description?: { content: string, id: string, languageCode: string, reviewType: string }, descriptions?: Array<{ content: string, id: string, languageCode: string, reviewType: string }>, properties?: Array<{ name: string, value?: string, type?: string }>, variations?: Array<{ id?: string, name?: string, code?: string, images?: Array<{ url?: string }>, properties?: Array<{ name: string, value?: string, type?: string }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } } };
+export type GetProductQuery = { product?: { name: string, id: string, code: string, slug?: string, outline?: string, minQuantity?: number, maxQuantity?: number, imgSrc?: string, images?: Array<{ url?: string }>, breadcrumbs?: Array<{ itemId: string, typeName?: string, title: string, seoPath?: string }>, description?: { content: string, id: string, languageCode: string, reviewType: string }, descriptions?: Array<{ content: string, id: string, languageCode: string, reviewType: string }>, properties?: Array<{ name: string, value?: any, type?: string }>, variations?: Array<{ id?: string, name?: string, code?: string, images?: Array<{ url?: string }>, properties?: Array<{ name: string, value?: any, type?: string }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } } };
 
 export type CategoriesQueryVariables = Exact<{
   storeId: Scalars['String'];

@@ -1,0 +1,17 @@
+query GetUserBalance($userId: String, $storeId: String) {
+  balance(userId: $userId, storeId: $storeId) {
+    id
+    storeId
+    amount
+    modifiedDate
+    pointsOperations {
+      id
+      storeId
+      reason
+      amount
+      balance
+      isDeposit
+      createdDate
+    }
+  }
+}
