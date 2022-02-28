@@ -4,7 +4,7 @@
     <div v-if="isAuthenticated" class="flex items-center">
       <TopHeaderLink to="/account/dashboard">Dashboard</TopHeaderLink>
       <div class="mx-3 h-1 w-1 bg-yellow-500 rounded"></div>
-      <TopHeaderLink to="/404">Order History</TopHeaderLink>
+      <TopHeaderLink to="/account/orders">Order History</TopHeaderLink>
       <div class="mx-3 h-1 w-1 bg-yellow-500 rounded"></div>
       <TopHeaderLink to="/500">Lists</TopHeaderLink>
       <div class="w-px h-5 bg-yellow-500 mx-4 hidden lg:block"></div>
@@ -12,7 +12,7 @@
       <!-- Account menu -->
       <div ref="loginMenu" class="relative cursor-pointer">
         <div class="text-white flex items-center" @click="loginMenuVisible = !loginMenuVisible">
-          <div>{{ me.userName }}</div>
+          <div>{{ me.contact?.fullName }}</div>
           <i class="fas fa-chevron-down ml-3 text-yellow-500 align-baseline"></i>
         </div>
         <div
@@ -21,7 +21,7 @@
         >
           <div class="flex items-center justify-between">
             <i class="fa fa-user-circle fa-2x fa-fw text-yellow-500"></i>
-            <span class="ml-2">{{ me.userName }}</span>
+            <span class="ml-2">{{ me.contact?.fullName }}</span>
             <button
               class="ml-4 text-gray-400 hover:bg-gray-200 border border-gray-200 rounded h-6 w-6 shadow"
               @click="signOut"
