@@ -11,6 +11,7 @@
         text="Checkout Defaults"
         class="checkout-icon"
       ></AccountNavigationLink>
+      <AccountNavigationLink to="/loyalty" text="Loyalty" class="list-icon"></AccountNavigationLink>
     </div>
   </VcCard>
   <!-- Commented due to accetpance criteria, will be used in future-->
