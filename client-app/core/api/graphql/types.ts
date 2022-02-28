@@ -2766,6 +2766,20 @@ export type PaymentTypeDynamicPropertiesArgs = {
   cultureName?: InputMaybe<Scalars['String']>;
 };
 
+export type PointsOperationType = {
+  amount: Scalars['Int'];
+  balance: Scalars['Int'];
+  createdBy?: Maybe<Scalars['String']>;
+  createdDate: Scalars['DateTime'];
+  id: Scalars['String'];
+  isDeposit: Scalars['Boolean'];
+  modifiedBy?: Maybe<Scalars['String']>;
+  modifiedDate?: Maybe<Scalars['DateTime']>;
+  reason: Scalars['String'];
+  storeId?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
+};
+
 export type PriceType = {
   /** Actual price */
   actual?: Maybe<MoneyType>;
@@ -3061,6 +3075,7 @@ export enum PropertyType {
 }
 
 export type Query = {
+  balance?: Maybe<UserBalanceType>;
   cart?: Maybe<CartType>;
   carts?: Maybe<CartConnection>;
   categories?: Maybe<CategoryConnection>;
@@ -3090,6 +3105,12 @@ export type Query = {
   validatePassword?: Maybe<CustomIdentityResultType>;
   wishlist?: Maybe<WishlistType>;
   wishlists?: Maybe<WishlistConnection>;
+};
+
+
+export type QueryBalanceArgs = {
+  storeId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3470,6 +3491,18 @@ export type TierPriceType = {
   priceWithTax?: Maybe<MoneyType>;
   /** Quantity */
   quantity?: Maybe<Scalars['Long']>;
+};
+
+export type UserBalanceType = {
+  amount: Scalars['Int'];
+  createdBy?: Maybe<Scalars['String']>;
+  createdDate: Scalars['DateTime'];
+  id: Scalars['String'];
+  modifiedBy?: Maybe<Scalars['String']>;
+  modifiedDate?: Maybe<Scalars['DateTime']>;
+  pointsOperations: Array<Maybe<PointsOperationType>>;
+  storeId?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
 };
 
 export type UserType = {

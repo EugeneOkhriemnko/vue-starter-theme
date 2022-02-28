@@ -22,6 +22,8 @@ const Orders = () => import("./pages/account/orders.vue");
 const Profile = () => import("./pages/account/profile.vue");
 const DemoLanding = () => import("./pages/demo-landing/demo-landing.vue");
 
+const Loyalty = () => import("./pages/loyalty/loyalty.vue");
+
 // Router definition
 const router = createRouter({
   // History mode
@@ -63,6 +65,7 @@ const router = createRouter({
     { path: `/${SeoUrl.Catalog}/:categorySeoUrls*`, name: "Catalog", component: Catalog, props: true },
     { path: `/${SeoUrl.Product}/:productId`, name: "Product", component: Product, props: true },
     { path: "/checkout", name: "Checkout", component: Checkout },
+    { path: "/loyalty", name: "Loyalty", component: Loyalty },
     { path: "/demo-landing", name: "DemoLanding", component: DemoLanding },
     { path: "/500", name: "InternalError", component: Error500 },
     { path: "/403", name: "NoAccess", component: Error403 },
