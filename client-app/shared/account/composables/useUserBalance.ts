@@ -4,8 +4,8 @@ import { getUserBalance } from "@core/api/graphql/account";
 import { MaybeRef } from "@vueuse/core";
 import { computed, readonly, ref, Ref, shallowRef, unref } from "vue";
 
-export default (options: { user: MaybeRef<UserType> }) => {
-  const { user } = options;
+export default (options: { user: MaybeRef<UserType>; includeOperations: Ref<boolean> }) => {
+  const { user, includeOperations } = options;
 
   const loading: Ref<boolean> = ref(false);
   const userBalance: Ref<UserBalanceType | null> = ref(null);
@@ -14,7 +14,7 @@ export default (options: { user: MaybeRef<UserType> }) => {
     loading.value = true;
 
     try {
-      userBalance.value = await getUserBalance(unref(user).id);
+      userBalance.value = await getUserBalance(includeOperations.value, unref(user).id);
     } catch (e) {
       Logger.error("useUserBalance.loadUserBalance", e);
       throw e;

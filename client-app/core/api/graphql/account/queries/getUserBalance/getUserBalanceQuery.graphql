@@ -1,5 +1,5 @@
-query GetUserBalance($userId: String, $storeId: String) {
-  balance(userId: $userId, storeId: $storeId) {
+query GetUserBalance($userId: String, $storeId: String, $includeOperations: Boolean) {
+  balance(userId: $userId, storeId: $storeId, includeOperations: $includeOperations) {
     id
     storeId
     amount

@@ -1982,6 +1982,7 @@ export type Mutations = {
   moveWishlistItem?: Maybe<WishlistType>;
   processOrderPayment?: Maybe<ProcessPaymentRequestResultType>;
   registerByInvitation?: Maybe<CustomIdentityResultType>;
+  registerPointsOperation?: Maybe<Scalars['Boolean']>;
   rejectGiftItems?: Maybe<CartType>;
   removeCart?: Maybe<Scalars['Boolean']>;
   removeCartAddress?: Maybe<CartType>;
@@ -2169,6 +2170,11 @@ export type MutationsProcessOrderPaymentArgs = {
 
 export type MutationsRegisterByInvitationArgs = {
   command: InputRegisterByInvitationType;
+};
+
+
+export type MutationsRegisterPointsOperationArgs = {
+  command: RegisterPointsOperationType;
 };
 
 
@@ -3133,6 +3139,7 @@ export type Query = {
   regions?: Maybe<Array<Maybe<CountryRegionType>>>;
   requestPasswordReset?: Maybe<Scalars['Boolean']>;
   role?: Maybe<RoleType>;
+  searchPointsOperations?: Maybe<SearchPointsOperationsResultType>;
   user?: Maybe<UserType>;
   validatePassword?: Maybe<CustomIdentityResultType>;
   wishlist?: Maybe<WishlistType>;
@@ -3141,6 +3148,7 @@ export type Query = {
 
 
 export type QueryBalanceArgs = {
+  includeOperations?: InputMaybe<Scalars['Boolean']>;
   storeId?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['String']>;
 };
@@ -3342,6 +3350,14 @@ export type QueryRoleArgs = {
 };
 
 
+export type QuerySearchPointsOperationsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  storeId?: InputMaybe<Scalars['String']>;
+  take?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryUserArgs = {
   email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
@@ -3382,6 +3398,17 @@ export type RangeFacet = Facet & {
   ranges?: Maybe<Array<Maybe<FacetRangeType>>>;
 };
 
+export type RegisterPointsOperationType = {
+  /** Amount */
+  amount: Scalars['Int'];
+  /** Reason */
+  reason: Scalars['String'];
+  /** Store Id */
+  storeId?: InputMaybe<Scalars['String']>;
+  /** User Id */
+  userId: Scalars['String'];
+};
+
 export type RoleType = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
@@ -3389,6 +3416,11 @@ export type RoleType = {
   normalizedName: Scalars['String'];
   /** Permissions in Role */
   permissions: Array<Maybe<Scalars['String']>>;
+};
+
+export type SearchPointsOperationsResultType = {
+  results: Array<Maybe<PointsOperationType>>;
+  totalCount: Scalars['Int'];
 };
 
 export type SeoInfo = {
@@ -3751,7 +3783,22 @@ export type GetMyOrdersQueryVariables = Exact<{
 }>;
 
 
-export type GetMyOrdersQuery = { orders?: { totalCount?: number, items?: Array<{ id: string, createdDate: any, status?: string, number: string, customerId: string, currency?: { code: string }, total?: { amount: any, decimalDigits: number, formattedAmount: string, formattedAmountWithoutCurrency: string, formattedAmountWithoutPoint: string, formattedAmountWithoutPointAndCurrency: string, currency?: { code: string, customFormatting?: string, exchangeRate?: any, symbol?: string } }, inPayments: Array<{ number: string }> }> } };
+export type GetMyOrdersQuery = { orders?: { totalCount?: number, items?: Array<{ id: string, createdDate: any, status?: string, number: string, customerId: string, purchaseOrderNumber?: string, currency?: { code: string }, total?: { amount: any, decimalDigits: number, formattedAmount: string, formattedAmountWithoutCurrency: string, formattedAmountWithoutPoint: string, formattedAmountWithoutPointAndCurrency: string, currency?: { code: string, customFormatting?: string, exchangeRate?: any, symbol?: string } }, inPayments: Array<{ number: string }> }> } };
+
+export type GetUserBalanceQueryVariables = Exact<{
+  userId?: InputMaybe<Scalars['String']>;
+  storeId?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetUserBalanceQuery = { balance?: { id: string, storeId?: string, amount: number, modifiedDate?: any, pointsOperations: Array<{ id: string, storeId?: string, reason: string, amount: number, balance: number, isDeposit: boolean, createdDate: any }> } };
+
+export type AddBulkItemsToCartMutationVariables = Exact<{
+  command: InputAddBulkItemsType;
+}>;
+
+
+export type AddBulkItemsToCartMutation = { addBulkItemsCart?: { errors?: Array<{ errorCode?: string, errorMessage?: string, objectId?: string }> } };
 
 export type AddCouponMutationVariables = Exact<{
   command: InputAddCouponType;
@@ -3773,6 +3820,13 @@ export type AddItemMutationVariables = Exact<{
 
 
 export type AddItemMutation = { addItem?: { name: string, itemsQuantity?: number } };
+
+export type AddItemsCartMutationVariables = Exact<{
+  command: InputAddItemsType;
+}>;
+
+
+export type AddItemsCartMutation = { addItemsCart?: { name: string } };
 
 export type AddOrUpdateCartPaymentMutationVariables = Exact<{
   command: InputAddOrUpdateCartPaymentType;
@@ -3938,6 +3992,7 @@ export type SearchProductsQueryVariables = Exact<{
   fuzzy?: InputMaybe<Scalars['Boolean']>;
   fuzzyLevel?: InputMaybe<Scalars['Int']>;
   withFacets: Scalars['Boolean'];
+  productIds?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
 }>;
 
 
