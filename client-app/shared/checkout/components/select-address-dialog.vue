@@ -1,34 +1,36 @@
 <template>
-  <VcPopup title="Select address" modal-width="max-w-5xl">
+  <VcPopup :title="$t('shared.checkout.select_address_dialog.title')" modal-width="max-w-5xl">
     <template #actions="{ close }">
       <button
-        class="uppercase inline-flex items-center justify-center lg:mr-auto px-2 h-9 font-roboto-condensed text-sm font-bold border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-600 hover:border-yellow-600 hover:text-white rounded focus:outline-none"
+        class="uppercase inline-flex items-center justify-center lg:mr-auto px-2 h-9 font-roboto-condensed text-sm font-bold border-2 border-[color:var(--color-primary)] text-[color:var(--color-primary)] hover:bg-[color:var(--color-primary-hover)] hover:border-[color:var(--color-primary-hover)] hover:text-white rounded focus:outline-none"
         :class="[isMobile && 'flex-grow w-1/2']"
         @click="
           $emit('addNewAddress');
           close();
         "
-      >
-        Add new address
-      </button>
+        v-t="'shared.checkout.select_address_dialog.add_address_button'"
+      ></button>
 
       <div class="flex justify-between space-x-3" :class="[isMobile ? 'flex-grow w-1/2' : 'w-1/5']">
         <button
           v-if="!isMobile"
           class="w-1/2 lg:w-auto uppercase flex-grow lg:flex-grow-0 inline-flex items-center justify-center lg:px-5 h-9 font-roboto-condensed text-sm font-bold border-2 border-black text-black hover:bg-black hover:text-white rounded focus:outline-none"
           @click="close"
-        >
-          Cancel
-        </button>
+          v-t="'shared.checkout.select_address_dialog.cancel_button'"
+        ></button>
 
         <button
-          class="w-1/2 lg:w-auto uppercase flex-grow lg:flex-grow-0 inline-flex items-center justify-center lg:px-10 h-9 font-roboto-condensed text-sm font-bold border-2 border-yellow-500 bg-yellow-500 text-white hover:bg-yellow-600 hover:border-yellow-600 rounded focus:outline-none"
+          class="w-1/2 lg:w-auto uppercase flex-grow lg:flex-grow-0 inline-flex items-center justify-center lg:px-10 h-9 font-roboto-condensed text-sm font-bold border-2 border-[color:var(--color-primary)] bg-[color:var(--color-primary)] text-white hover:bg-[color:var(--color-primary-hover)] hover:border-[color:var(--color-primary-hover)] rounded focus:outline-none"
           @click="
             $emit('result', selectedAddress);
             close();
           "
         >
-          {{ isMobile ? "Save" : "OK" }}
+          {{
+            isMobile
+              ? $t("shared.checkout.select_address_dialog.save_button")
+              : $t("shared.checkout.select_address_dialog.ok_button")
+          }}
         </button>
       </div>
     </template>
@@ -55,17 +57,19 @@
 
           <div v-else class="w-1/4">
             <button
-              class="uppercase flex-grow flex items-center mx-auto justify-center px-3 h-9 font-roboto-condensed text-base font-bold border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded focus:outline-none"
+              class="uppercase flex-grow flex items-center mx-auto justify-center px-3 h-9 font-roboto-condensed text-base font-bold border-2 border-[color:var(--color-primary)] text-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] hover:text-white rounded focus:outline-none"
               @click="setAddress(itemData.item)"
-            >
-              Select
-            </button>
+              v-t="'shared.checkout.select_address_dialog.select_button'"
+            ></button>
           </div>
         </div>
       </template>
 
       <template #mobile-empty>
-        <div class="flex items-center space-x-3 p-6 border-b border-gray-200">There are no addresses yet</div>
+        <div
+          class="flex items-center space-x-3 p-6 border-b border-gray-200"
+          v-t="'shared.checkout.select_address_dialog.no_addresses_message'"
+        ></div>
       </template>
 
       <template #desktop-body>
@@ -84,11 +88,10 @@
           </td>
           <td v-else class="p-5">
             <button
-              class="uppercase flex-grow flex items-center mx-auto justify-center px-3 h-9 font-roboto-condensed text-base font-bold border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded focus:outline-none"
+              class="uppercase flex-grow flex items-center mx-auto justify-center px-3 h-9 font-roboto-condensed text-base font-bold border-2 border-[color:var(--color-primary)] text-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] hover:text-white rounded focus:outline-none"
               @click="setAddress(address)"
-            >
-              Select
-            </button>
+              v-t="'shared.checkout.select_address_dialog.select_button'"
+            ></button>
           </td>
         </tr>
       </template>
@@ -105,7 +108,7 @@
         <tr>
           <td colspan="5">
             <div class="flex items-center p-5 border-b border-gray-200">
-              <span class="text-base">There are no addresses yet</span>
+              <span class="text-base" v-t="'shared.checkout.select_address_dialog.no_addresses_message'"></span>
             </div>
           </td>
         </tr>
@@ -126,6 +129,9 @@ import { MemberAddressType } from "@/core/api/graphql/types";
 import { computed, watchEffect, PropType, ref } from "vue";
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
 import { isEqualAddresses } from "@core/utilities";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const props = defineProps({
   currentAddress: {
@@ -161,23 +167,23 @@ const paginatedAddresses = computed(() =>
 const columns = ref<ITableColumn[]>([
   {
     id: "firstName",
-    title: "Recipient's name",
+    title: t("shared.checkout.select_address_dialog.table_columns.recipient"),
   },
   {
     id: "countryCode",
-    title: "Address",
+    title: t("shared.checkout.select_address_dialog.table_columns.address"),
   },
   {
     id: "phone",
-    title: "Phone",
+    title: t("shared.checkout.select_address_dialog.table_columns.phone"),
   },
   {
     id: "email",
-    title: "Email",
+    title: t("shared.checkout.select_address_dialog.table_columns.email"),
   },
   {
     id: "activeAddress",
-    title: "Active address",
+    title: t("shared.checkout.select_address_dialog.table_columns.active_address"),
     titlePosition: "text-center",
   },
 ]);
