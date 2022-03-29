@@ -24,6 +24,8 @@ const Orders = () => import("./pages/account/orders.vue");
 const Profile = () => import("./pages/account/profile.vue");
 const DemoLanding = () => import("./pages/demo-landing/demo-landing.vue");
 
+const Loyalty = () => import("./pages/loyalty/loyalty.vue");
+
 // Router definition
 const router = createRouter({
   // History mode
@@ -58,6 +60,7 @@ const router = createRouter({
         { path: "checkout-defaults", name: "CheckoutDefaults", component: CheckoutDefaults },
         { path: "orders", name: "Orders", component: Orders },
         { path: "order-details/:id", name: "OrderDetails", component: OrderDetails },
+        { path: "loyalty", name: "Loyalty", component: Loyalty },
       ],
     },
     { path: "/forgot-password", name: "ForgotPassword", component: ForgotPassword },
