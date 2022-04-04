@@ -1,0 +1,3 @@
+mutation RegisterPointsOperation($command: RegisterPointsOperationType!) {
+  registerPointsOperation(command: $command)
+}

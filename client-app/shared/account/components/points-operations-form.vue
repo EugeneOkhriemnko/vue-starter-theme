@@ -11,19 +11,22 @@
           label="Amount"
           class="mb-4"
           is-required
+          :type="'number'"
         />
+      </div>
 
       <!-- Divider -->
       <div class="border-t md:border-l border-yellow-500 mt-8 mb-6 md:mt-6 md:mb-4 -mx-96 md:mx-9"></div>
 
       <div class="md:w-1/2">
-        <div class="flex flex-col xl:flex-row xl:flex-wrap">
-        <VcInput
+        <VcTextArea
           v-model="reason"
           :error-message="errors.reason"
           :is-disabled="disabled"
-          label="Reason"
+          :counter="true"
+          :label="'Reason'"
           class="mb-4"
+          is-required
         />
       </div>
     </div>
@@ -36,7 +39,7 @@
 import { computed, PropType, ref, Ref, watch } from "vue";
 import { clone } from "lodash";
 import { useForm, useField } from "vee-validate";
-import { VcInput } from "@/components";
+import { VcInput, VcTextArea } from "@/components";
 import { Logger } from "@core/utilities";
 import { PointsOperationType } from "@/core/api/graphql/types";
 import * as yup from "yup";
@@ -62,7 +65,7 @@ const _emptyOperation: Readonly<PointsOperationType> = {
   createdDate: "",
   id: "",
   isDeposit: false,
-  userId: ""
+  userId: "",
   // FIXME: The values may be NULL. Incorrect behavior of the "dirty" variable
 };
 
@@ -95,7 +98,7 @@ const slotsData = computed(() => ({
 }));
 
 const { value: amount } = useField<number>("amount", yup.number().max(10000).min(-10000));
-const { value: reason } = useField<string>("reason", yup.string().max(128).nullable());
+const { value: reason } = useField<string>("reason", yup.string().max(128).required());
 
 const save = handleSubmit((operation) => {
   const newOperation: PointsOperationType = { ...operation };

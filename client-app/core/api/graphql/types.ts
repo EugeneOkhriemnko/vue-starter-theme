@@ -486,105 +486,6 @@ export type CustomIdentityResultType = {
   succeeded: Scalars['Boolean'];
 };
 
-/** A connection from an object to a list of objects of type `CustomerOrder`. */
-export type CustomerOrderConnection = {
-  /** A list of all of the edges returned in the connection. */
-  edges?: Maybe<Array<Maybe<CustomerOrderEdge>>>;
-  /** A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for "{ edges { node } }" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the "cursor" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full "{ edges { node } } " version should be used instead. */
-  items?: Maybe<Array<Maybe<CustomerOrderType>>>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing "5" as the argument to `first`, then fetch the total count so it could display "5 of 83", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`. */
-  totalCount?: Maybe<Scalars['Int']>;
-};
-
-/** An edge in a connection from an object to another object of type `CustomerOrder`. */
-export type CustomerOrderEdge = {
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-  /** The item at the end of the edge */
-  node?: Maybe<CustomerOrderType>;
-};
-
-export type CustomerOrderType = {
-  addresses: Array<Maybe<OrderAddressType>>;
-  cancelReason?: Maybe<Scalars['String']>;
-  cancelledDate?: Maybe<Scalars['DateTime']>;
-  channelId?: Maybe<Scalars['String']>;
-  comment?: Maybe<Scalars['String']>;
-  coupons?: Maybe<Array<Maybe<Scalars['String']>>>;
-  createdBy?: Maybe<Scalars['String']>;
-  createdDate: Scalars['DateTime'];
-  currency?: Maybe<CurrencyType>;
-  customerId: Scalars['String'];
-  customerName?: Maybe<Scalars['String']>;
-  discountAmount?: Maybe<MoneyType>;
-  discountTotal?: Maybe<MoneyType>;
-  discountTotalWithTax?: Maybe<MoneyType>;
-  discounts?: Maybe<Array<Maybe<OrderDiscountType>>>;
-  /** Customer order dynamic property values */
-  dynamicProperties?: Maybe<Array<Maybe<DynamicPropertyValueType>>>;
-  employeeId?: Maybe<Scalars['String']>;
-  employeeName?: Maybe<Scalars['String']>;
-  fee?: Maybe<MoneyType>;
-  feeTotal: Scalars['Decimal'];
-  feeTotalWithTax: Scalars['Decimal'];
-  feeWithTax: Scalars['Decimal'];
-  id: Scalars['String'];
-  inPayments: Array<Maybe<PaymentInType>>;
-  isApproved: Scalars['Boolean'];
-  isCancelled: Scalars['Boolean'];
-  isPrototype: Scalars['Boolean'];
-  items: Array<Maybe<OrderLineItemType>>;
-  languageCode?: Maybe<Scalars['String']>;
-  modifiedBy?: Maybe<Scalars['String']>;
-  modifiedDate?: Maybe<Scalars['DateTime']>;
-  number: Scalars['String'];
-  objectType: Scalars['String'];
-  operationType: Scalars['String'];
-  organizationId?: Maybe<Scalars['String']>;
-  organizationName?: Maybe<Scalars['String']>;
-  outerId?: Maybe<Scalars['String']>;
-  parentOperationId?: Maybe<Scalars['String']>;
-  paymentDiscountTotal?: Maybe<MoneyType>;
-  paymentDiscountTotalWithTax?: Maybe<MoneyType>;
-  paymentSubTotal?: Maybe<MoneyType>;
-  paymentSubTotalWithTax?: Maybe<MoneyType>;
-  paymentTaxTotal?: Maybe<MoneyType>;
-  paymentTotal?: Maybe<MoneyType>;
-  paymentTotalWithTax?: Maybe<MoneyType>;
-  purchaseOrderNumber?: Maybe<Scalars['String']>;
-  shipments?: Maybe<Array<Maybe<OrderShipmentType>>>;
-  shippingDiscountTotal?: Maybe<MoneyType>;
-  shippingDiscountTotalWithTax?: Maybe<MoneyType>;
-  shippingSubTotal?: Maybe<MoneyType>;
-  shippingSubTotalWithTax?: Maybe<MoneyType>;
-  shippingTaxTotal?: Maybe<MoneyType>;
-  shippingTotal?: Maybe<MoneyType>;
-  shippingTotalWithTax?: Maybe<MoneyType>;
-  shoppingCartId?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
-  storeId: Scalars['String'];
-  storeName?: Maybe<Scalars['String']>;
-  subTotal?: Maybe<MoneyType>;
-  subTotalDiscount?: Maybe<MoneyType>;
-  subTotalDiscountWithTax?: Maybe<MoneyType>;
-  subTotalTaxTotal?: Maybe<MoneyType>;
-  subTotalWithTax?: Maybe<MoneyType>;
-  subscriptionId?: Maybe<Scalars['String']>;
-  subscriptionNumber?: Maybe<Scalars['String']>;
-  taxDetails: Array<Maybe<OrderTaxDetailType>>;
-  taxPercentRate: Scalars['Decimal'];
-  taxTotal?: Maybe<MoneyType>;
-  taxType?: Maybe<Scalars['String']>;
-  total?: Maybe<MoneyType>;
-};
-
-
-export type CustomerOrderTypeDynamicPropertiesArgs = {
-  cultureName?: InputMaybe<Scalars['String']>;
-};
-
 export type DescriptionType = {
   /** Description text. */
   content: Scalars['String'];
@@ -1827,6 +1728,106 @@ export type LineItemTypeDynamicPropertiesArgs = {
   cultureName?: InputMaybe<Scalars['String']>;
 };
 
+/** A connection from an object to a list of objects of type `LoyaltyOrder`. */
+export type LoyaltyOrderConnection = {
+  /** A list of all of the edges returned in the connection. */
+  edges?: Maybe<Array<Maybe<LoyaltyOrderEdge>>>;
+  /** A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for "{ edges { node } }" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the "cursor" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full "{ edges { node } } " version should be used instead. */
+  items?: Maybe<Array<Maybe<LoyaltyOrderType>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing "5" as the argument to `first`, then fetch the total count so it could display "5 of 83", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`. */
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+/** An edge in a connection from an object to another object of type `LoyaltyOrder`. */
+export type LoyaltyOrderEdge = {
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge */
+  node?: Maybe<LoyaltyOrderType>;
+};
+
+export type LoyaltyOrderType = {
+  addresses: Array<Maybe<OrderAddressType>>;
+  cancelReason?: Maybe<Scalars['String']>;
+  cancelledDate?: Maybe<Scalars['DateTime']>;
+  channelId?: Maybe<Scalars['String']>;
+  comment?: Maybe<Scalars['String']>;
+  coupons?: Maybe<Array<Maybe<Scalars['String']>>>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdDate: Scalars['DateTime'];
+  currency?: Maybe<CurrencyType>;
+  customerId: Scalars['String'];
+  customerName?: Maybe<Scalars['String']>;
+  discountAmount?: Maybe<MoneyType>;
+  discountTotal?: Maybe<MoneyType>;
+  discountTotalWithTax?: Maybe<MoneyType>;
+  discounts?: Maybe<Array<Maybe<OrderDiscountType>>>;
+  /** Customer order dynamic property values */
+  dynamicProperties?: Maybe<Array<Maybe<DynamicPropertyValueType>>>;
+  employeeId?: Maybe<Scalars['String']>;
+  employeeName?: Maybe<Scalars['String']>;
+  fee?: Maybe<MoneyType>;
+  feeTotal: Scalars['Decimal'];
+  feeTotalWithTax: Scalars['Decimal'];
+  feeWithTax: Scalars['Decimal'];
+  id: Scalars['String'];
+  inPayments: Array<Maybe<PaymentInType>>;
+  isApproved: Scalars['Boolean'];
+  isCancelled: Scalars['Boolean'];
+  isPrototype: Scalars['Boolean'];
+  items: Array<Maybe<OrderLineItemType>>;
+  languageCode?: Maybe<Scalars['String']>;
+  loyaltyCalculated?: Maybe<Scalars['Boolean']>;
+  modifiedBy?: Maybe<Scalars['String']>;
+  modifiedDate?: Maybe<Scalars['DateTime']>;
+  number: Scalars['String'];
+  objectType: Scalars['String'];
+  operationType: Scalars['String'];
+  organizationId?: Maybe<Scalars['String']>;
+  organizationName?: Maybe<Scalars['String']>;
+  outerId?: Maybe<Scalars['String']>;
+  parentOperationId?: Maybe<Scalars['String']>;
+  paymentDiscountTotal?: Maybe<MoneyType>;
+  paymentDiscountTotalWithTax?: Maybe<MoneyType>;
+  paymentSubTotal?: Maybe<MoneyType>;
+  paymentSubTotalWithTax?: Maybe<MoneyType>;
+  paymentTaxTotal?: Maybe<MoneyType>;
+  paymentTotal?: Maybe<MoneyType>;
+  paymentTotalWithTax?: Maybe<MoneyType>;
+  purchaseOrderNumber?: Maybe<Scalars['String']>;
+  shipments?: Maybe<Array<Maybe<OrderShipmentType>>>;
+  shippingDiscountTotal?: Maybe<MoneyType>;
+  shippingDiscountTotalWithTax?: Maybe<MoneyType>;
+  shippingSubTotal?: Maybe<MoneyType>;
+  shippingSubTotalWithTax?: Maybe<MoneyType>;
+  shippingTaxTotal?: Maybe<MoneyType>;
+  shippingTotal?: Maybe<MoneyType>;
+  shippingTotalWithTax?: Maybe<MoneyType>;
+  shoppingCartId?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  storeId: Scalars['String'];
+  storeName?: Maybe<Scalars['String']>;
+  subTotal?: Maybe<MoneyType>;
+  subTotalDiscount?: Maybe<MoneyType>;
+  subTotalDiscountWithTax?: Maybe<MoneyType>;
+  subTotalTaxTotal?: Maybe<MoneyType>;
+  subTotalWithTax?: Maybe<MoneyType>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  subscriptionNumber?: Maybe<Scalars['String']>;
+  taxDetails: Array<Maybe<OrderTaxDetailType>>;
+  taxPercentRate: Scalars['Decimal'];
+  taxTotal?: Maybe<MoneyType>;
+  taxType?: Maybe<Scalars['String']>;
+  total?: Maybe<MoneyType>;
+};
+
+
+export type LoyaltyOrderTypeDynamicPropertiesArgs = {
+  cultureName?: InputMaybe<Scalars['String']>;
+};
+
 /** A connection from an object to a list of objects of type `MemberAddress`. */
 export type MemberAddressConnection = {
   /** A list of all of the edges returned in the connection. */
@@ -1970,7 +1971,7 @@ export type Mutations = {
   clearPayments?: Maybe<CartType>;
   clearShipments?: Maybe<CartType>;
   createContact?: Maybe<ContactType>;
-  createOrderFromCart?: Maybe<CustomerOrderType>;
+  createOrderFromCart?: Maybe<LoyaltyOrderType>;
   createOrganization?: Maybe<Organization>;
   createUser?: Maybe<IdentityResultType>;
   createWishlist?: Maybe<WishlistType>;
@@ -2001,10 +2002,10 @@ export type Mutations = {
   updateContact?: Maybe<ContactType>;
   updateMemberAddresses?: Maybe<MemberType>;
   updateMemberDynamicProperties?: Maybe<MemberType>;
-  updateOrderDynamicProperties?: Maybe<CustomerOrderType>;
-  updateOrderItemDynamicProperties?: Maybe<CustomerOrderType>;
-  updateOrderPaymentDynamicProperties?: Maybe<CustomerOrderType>;
-  updateOrderShipmentDynamicProperties?: Maybe<CustomerOrderType>;
+  updateOrderDynamicProperties?: Maybe<LoyaltyOrderType>;
+  updateOrderItemDynamicProperties?: Maybe<LoyaltyOrderType>;
+  updateOrderPaymentDynamicProperties?: Maybe<LoyaltyOrderType>;
+  updateOrderShipmentDynamicProperties?: Maybe<LoyaltyOrderType>;
   updateOrganization?: Maybe<Organization>;
   updatePersonalData?: Maybe<IdentityResultType>;
   updateRole?: Maybe<IdentityResultType>;
@@ -2681,7 +2682,7 @@ export type PaymentInType = {
   objectType: Scalars['String'];
   operationType: Scalars['String'];
   /** Associated Order */
-  order: CustomerOrderType;
+  order: LoyaltyOrderType;
   orderId?: Maybe<Scalars['String']>;
   organizationId?: Maybe<Scalars['String']>;
   organizationName?: Maybe<Scalars['String']>;
@@ -3127,8 +3128,8 @@ export type Query = {
   dynamicProperty?: Maybe<DynamicPropertyType>;
   me?: Maybe<UserType>;
   menus?: Maybe<Array<Maybe<MenuLinkListType>>>;
-  order?: Maybe<CustomerOrderType>;
-  orders?: Maybe<CustomerOrderConnection>;
+  order?: Maybe<LoyaltyOrderType>;
+  orders?: Maybe<LoyaltyOrderConnection>;
   organization?: Maybe<Organization>;
   organizations?: Maybe<OrganizationConnection>;
   payments?: Maybe<PaymentInConnection>;
@@ -3731,6 +3732,13 @@ export type DeleteMemberAddressesMutationVariables = Exact<{
 
 export type DeleteMemberAddressesMutation = { deleteMemberAddresses?: { id: string } };
 
+export type RegisterPointsOperationMutationVariables = Exact<{
+  command: RegisterPointsOperationType;
+}>;
+
+
+export type RegisterPointsOperationMutation = { registerPointsOperation?: boolean };
+
 export type UpdateMemberAddressesMutationVariables = Exact<{
   command: InputUpdateMemberAddressType;
 }>;
@@ -3785,9 +3793,20 @@ export type GetMyOrdersQueryVariables = Exact<{
 
 export type GetMyOrdersQuery = { orders?: { totalCount?: number, items?: Array<{ id: string, createdDate: any, status?: string, number: string, customerId: string, purchaseOrderNumber?: string, currency?: { code: string }, total?: { amount: any, decimalDigits: number, formattedAmount: string, formattedAmountWithoutCurrency: string, formattedAmountWithoutPoint: string, formattedAmountWithoutPointAndCurrency: string, currency?: { code: string, customFormatting?: string, exchangeRate?: any, symbol?: string } }, inPayments: Array<{ number: string }> }> } };
 
+export type GetPointsOperationsQueryVariables = Exact<{
+  userId?: InputMaybe<Scalars['String']>;
+  storeId?: InputMaybe<Scalars['String']>;
+  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetPointsOperationsQuery = { searchPointsOperations?: { totalCount: number, results: Array<{ id: string, storeId?: string, reason: string, amount: number, balance: number, isDeposit: boolean, createdDate: any }> } };
+
 export type GetUserBalanceQueryVariables = Exact<{
   userId?: InputMaybe<Scalars['String']>;
   storeId?: InputMaybe<Scalars['String']>;
+  includeOperations?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 
@@ -3943,7 +3962,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { product?: { name: string, id: string, code: string, slug?: string, outline?: string, minQuantity?: number, maxQuantity?: number, imgSrc?: string, images?: Array<{ url?: string }>, breadcrumbs?: Array<{ itemId: string, typeName?: string, title: string, seoPath?: string }>, description?: { content: string, id: string }, descriptions?: Array<{ content: string, id: string }>, properties?: Array<{ name: string, value?: any, type?: string }>, variations?: Array<{ id?: string, name?: string, minQuantity?: number, maxQuantity?: number, code?: string, images?: Array<{ url?: string }>, properties?: Array<{ name: string, value?: any, type?: string }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } } };
+export type GetProductQuery = { product?: { name: string, id: string, code: string, slug?: string, outline?: string, minQuantity?: number, maxQuantity?: number, imgSrc?: string, images?: Array<{ url?: string }>, breadcrumbs?: Array<{ itemId: string, typeName?: string, title: string, seoPath?: string }>, description?: { content: string, id: string }, descriptions?: Array<{ content: string, id: string }>, properties?: Array<{ name: string, value?: any, type?: string, hidden: boolean, valueType?: string, label?: string }>, variations?: Array<{ id?: string, name?: string, minQuantity?: number, maxQuantity?: number, code?: string, images?: Array<{ url?: string }>, properties?: Array<{ name: string, value?: any, type?: string }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } }>, availabilityData?: { isActive?: boolean, isAvailable?: boolean, isBuyable?: boolean, isInStock?: boolean, availableQuantity: any }, price?: { actual?: { amount: any, formattedAmount: string }, discountAmount?: { amount: any, formattedAmount: string }, sale?: { amount: any, formattedAmount: string }, list?: { amount: any, formattedAmount: string } } } };
 
 export type GetSearchResultsQueryVariables = Exact<{
   storeId: Scalars['String'];

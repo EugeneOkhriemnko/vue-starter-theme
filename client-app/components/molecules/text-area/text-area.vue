@@ -1,5 +1,10 @@
 <template>
-  <div class="relative">
+  <div>
+    <div v-if="label">
+      <span class="font-bold text-gray-900">{{ label }}</span>
+      <span v-if="isRequired" class="text-[color:var(--color-danger)]">*</span>
+    </div>
+
     <textarea
       v-model="text"
       :rows="rows"
@@ -25,6 +30,16 @@ import { computed } from "vue";
 const props = defineProps({
   counter: Boolean,
   isDisabled: Boolean,
+
+  label: {
+    type: String,
+    default: undefined,
+  },
+
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
 
   rows: {
     type: [Number, String],

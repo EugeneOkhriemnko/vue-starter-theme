@@ -1,20 +1,19 @@
+import { currentUserId, storeId } from "@core/constants";
+
 import { UserBalanceType, UserType } from "@/core/api/graphql/types";
 import { Logger } from "@/core/utilities";
 import { getUserBalance } from "@core/api/graphql/account";
-import { MaybeRef } from "@vueuse/core";
-import { computed, readonly, ref, Ref, shallowRef, unref } from "vue";
+import { computed, readonly, ref, Ref } from "vue";
 
-export default (options: { user: MaybeRef<UserType>; includeOperations: Ref<boolean> }) => {
-  const { user, includeOperations } = options;
-
+export default () => {
   const loading: Ref<boolean> = ref(false);
   const userBalance: Ref<UserBalanceType | null> = ref(null);
 
-  async function loadUserBalance() {
+  async function loadUserBalance(includeOperations: boolean) {
     loading.value = true;
 
     try {
-      userBalance.value = await getUserBalance(includeOperations.value, unref(user).id);
+      userBalance.value = await getUserBalance(includeOperations, currentUserId, storeId);
     } catch (e) {
       Logger.error("useUserBalance.loadUserBalance", e);
       throw e;
